@@ -4,11 +4,15 @@ Turns the City of Toronto [Address Points](https://open.toronto.ca/dataset/addre
 dataset (~525,000 addresses) into map-tile layers that OpenStreetMap mappers can
 add to the **JOSM** and **iD** editors as a reference overlay.
 
+**Live layer and how to add it: https://skfd.github.io/toronto-addresses-layer/**
+
 It is a sibling of [toronto-addresses-import](https://github.com/skfd/toronto-addresses-import)
 but standalone: the City publishes the data already in WGS84, so this project
 downloads it directly and has no dependency on the import project's database.
 
-![The raster layer shown in JOSM over aerial imagery](JOSM.png)
+![The vector layer in iD, with a clicked point's address tags in the inspector](iD.png)
+
+![The raster layer in JOSM, house numbers rendered over aerial imagery](JOSM.png)
 
 ## What it produces
 

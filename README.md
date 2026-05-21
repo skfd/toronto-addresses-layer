@@ -8,6 +8,8 @@ It is a sibling of [toronto-addresses-import](https://github.com/skfd/toronto-ad
 but standalone: the City publishes the data already in WGS84, so this project
 downloads it directly and has no dependency on the import project's database.
 
+![The raster layer shown in JOSM over aerial imagery](JOSM.png)
+
 ## What it produces
 
 - **Vector tiles** (MVT) &mdash; interactive in iD; click a point to read its tags.

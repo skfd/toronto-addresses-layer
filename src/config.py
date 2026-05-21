@@ -41,9 +41,10 @@ PAGES_URL = "https://skfd.github.io/toronto-addresses-layer"
 # WSL distro that has tippecanoe installed (see wsl-setup.md).
 WSL_DISTRO = "Ubuntu"
 
-# Vector tiles. Maxzoom 16 keeps the editor overzoom gap to 3 levels (z16 -> z19).
+# Vector tiles. iD requests tiles at (map zoom - 1) and does NOT overzoom, so
+# tiles must be generated natively through the zooms used for address mapping.
 VECTOR_MINZOOM = 12
-VECTOR_MAXZOOM = 16
+VECTOR_MAXZOOM = 19
 VECTOR_LAYER_NAME = "addresses"
 
 # Raster tiles. Editors overzoom z18 -> z19.

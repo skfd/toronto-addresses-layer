@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toronto Address Points &mdash; Reference Layer for OSM Editors</title>
+<link rel="stylesheet" href="index.css">
+</head>
+<body>
+<main>
+
+<h1>Toronto Address Points</h1>
+<p class="lead">
+  A reference layer of every municipal address point published by the City of
+  Toronto &mdash; <strong>{{POINT_COUNT}}</strong> addresses &mdash; ready to add
+  to the <a href="https://www.openstreetmap.org">OpenStreetMap</a> editors
+  <strong>iD</strong> and <strong>JOSM</strong> while you map.
+</p>
+<p class="meta">Tiles rebuilt: {{BUILD_DATE}}</p>
+
+<div class="attribution">
+  Address data &copy; City of Toronto, published under the
+  <a href="{{LICENSE_URL}}">Open Government Licence &ndash; Toronto</a>.
+  Source: <a href="{{DATASET_PAGE}}">Address Points (Municipal)</a>.
+</div>
+
+<h2>Two layers &mdash; which to use</h2>
+<table>
+  <tr>
+    <th>Vector layer</th>
+    <td>Interactive. Click a point to read its address tags
+        (<code>addr</code>, <code>housenumber</code>, <code>street</code>,
+        <code>class</code>). Best in <strong>iD</strong>.</td>
+  </tr>
+  <tr>
+    <th>Raster layer</th>
+    <td>House numbers drawn as text directly on the tiles. A readable backdrop.
+        Best in <strong>JOSM</strong>.</td>
+  </tr>
+</table>
+
+<h2>Add to iD</h2>
+<h3>Vector layer (interactive)</h3>
+<ol>
+  <li>Open the iD editor and press <kbd>F</kbd> for the <em>Map Data</em> panel.</li>
+  <li>Under <em>Custom Map Data</em>, open the settings and paste this URL:</li>
+</ol>
+<pre class="url">{{VECTOR_URL}}</pre>
+<p>Zoom in, then click any point to see its address tags in the inspector.</p>
+
+<h3>Raster layer (visible numbers)</h3>
+<ol>
+  <li>Open the <em>Background</em> panel and choose <em>Custom</em>.</li>
+  <li>Paste this URL template:</li>
+</ol>
+<pre class="url">{{RASTER_URL}}</pre>
+
+<h2>Add to JOSM</h2>
+<h3>Raster layer (recommended for JOSM)</h3>
+<ol>
+  <li>Open <em>Preferences &rarr; Imagery</em> and click <strong>+TMS</strong>.</li>
+  <li>Paste this entry (the <code>tms[16,18]</code> prefix sets the zoom range;
+      JOSM scales it up past z18):</li>
+</ol>
+<pre class="url">tms[16,18]:{{RASTER_URL_JOSM}}</pre>
+<p>
+  Give it a name such as <em>Toronto Address Numbers</em>, click OK, then enable
+  it from the <em>Imagery</em> menu. Note JOSM's placeholder is
+  <code>{zoom}</code>, not <code>{z}</code>.
+</p>
+
+<h3>Vector layer (optional)</h3>
+<p>
+  JOSM can also add the vector tiles via <em>Preferences &rarr; Imagery</em> &rarr;
+  <strong>+MVT</strong>:
+</p>
+<pre class="url">{{VECTOR_URL_JOSM}}</pre>
+<p>
+  JOSM renders the points but does not draw the house-number text &mdash; that is
+  what the raster layer above is for.
+</p>
+
+<h2>Notes</h2>
+<ul>
+  <li>Vector tiles are built to zoom 16 and overzoomed by the editor to z19;
+      raster tiles are pre-rendered for z16&ndash;18 and overzoomed to z19.</li>
+  <li>Tiles are refreshed daily from the City's dataset.</li>
+  <li>This is a <strong>reference</strong> layer &mdash; verify against survey or
+      imagery before copying anything into OpenStreetMap.</li>
+</ul>
+
+<footer>
+  <a href="https://github.com/{{GITHUB_REPO}}">Project source on GitHub</a>
+  &nbsp;&middot;&nbsp;
+  <a href="https://skfd.github.io/toronto-addresses-import/">Toronto address change tracker</a>
+  <br>
+  Future work: submission to the OSM Editor Layer Index for one-click access.
+</footer>
+
+</main>
+</body>
+</html>

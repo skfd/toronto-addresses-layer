@@ -5,6 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Toronto Address Points &mdash; Reference Layer for OSM Editors</title>
 <link rel="stylesheet" href="index.css">
+<link rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin="">
+<script defer src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+        crossorigin=""></script>
+<script defer src="index.js"></script>
 </head>
 <body>
 <main>
@@ -16,13 +24,20 @@
   to the <a href="https://www.openstreetmap.org">OpenStreetMap</a> editors
   <strong>iD</strong> and <strong>JOSM</strong> while you map.
 </p>
-<p class="meta">Tiles rebuilt: {{BUILD_DATE}}</p>
+<p class="meta">City data: {{DATA_DATE}} &middot; tiles rebuilt: {{BUILD_DATE}}</p>
 
 <div class="attribution">
   Address data &copy; City of Toronto, published under the
   <a href="{{LICENSE_URL}}">Open Government Licence &ndash; Toronto</a>.
   Source: <a href="{{DATASET_PAGE}}">Address Points (Municipal)</a>.
 </div>
+
+<h2>Preview</h2>
+<div id="preview-map" data-raster-url="{{RASTER_URL}}"></div>
+<p class="meta">
+  The raster (house-number) layer drawn over OpenStreetMap. Pan and zoom to
+  check coverage for the area you map.
+</p>
 
 <h2>Two layers &mdash; which to use</h2>
 <table>
@@ -39,6 +54,12 @@
   </tr>
 </table>
 
+<div class="note">
+  <strong>Heads-up:</strong> these tiles only render once you zoom in. Vector
+  points start appearing at city zoom; house-number labels show from about
+  zoom 16. If your editor looks empty after adding the layer, zoom in closer.
+</div>
+
 <h2>Add to iD</h2>
 <h3>Vector layer (interactive)</h3>
 <ol>
@@ -47,6 +68,14 @@
 </ol>
 <pre class="url">{{VECTOR_URL}}</pre>
 <p>Zoom in, then click any point to see its address tags in the inspector.</p>
+<figure>
+  <img src="iD.png" loading="lazy"
+       alt="The vector layer in iD: address points with one point's tags open in the inspector panel">
+  <figcaption>
+    The vector layer in iD &mdash; a clicked point's address tags in the
+    inspector.
+  </figcaption>
+</figure>
 
 <h3>Raster layer (visible numbers)</h3>
 <ol>
@@ -68,6 +97,13 @@
   it from the <em>Imagery</em> menu. Note JOSM's placeholder is
   <code>{zoom}</code>, not <code>{z}</code>.
 </p>
+<figure>
+  <img src="JOSM.png" loading="lazy"
+       alt="The raster layer in JOSM: house numbers rendered as text over aerial imagery">
+  <figcaption>
+    The raster layer in JOSM &mdash; house numbers over aerial imagery.
+  </figcaption>
+</figure>
 
 <h3>Vector layer (optional)</h3>
 <p>

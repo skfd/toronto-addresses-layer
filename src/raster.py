@@ -10,14 +10,16 @@ from collections import defaultdict
 from PIL import Image, ImageDraw, ImageFont
 
 from src import config
-from src.tilemath import TILE_SIZE, pixel_in_tile
+from src.tilemath import TILE_SIZE, lonlat_to_pixel
 
 DOT_COLOR = (224, 33, 138, 255)        # magenta -- visible over aerial imagery
 DOT_RADIUS = 2
 LABEL_COLOR = (0, 0, 0, 255)
 HALO_COLOR = (255, 255, 255, 235)
-FONT_PATH = os.path.join(config.ASSETS_DIR, "font", "DejaVuSans-Bold.ttf")
-FONT_SIZE = 10
+FONT_PATH = os.path.join(config.ASSETS_DIR, "font", "DejaVuSans.ttf")
+FONT_SIZE = 11
+STROKE_WIDTH = 1                       # white halo width, in pixels
+LABEL_GAP = 2                          # gap between the dot and the label
 
 
 def build_raster(slim_path=None):
@@ -32,18 +34,17 @@ def build_raster(slim_path=None):
 
 def _render_zoom(slim_path, zoom, font):
     """Bucket every point into its tile for one zoom, then render each tile."""
+    label = zoom in config.RASTER_LABEL_ZOOMS
     print(f"Raster z{zoom}: bucketing points ...")
     tiles = defaultdict(list)  # (tx, ty) -> [(ox, oy, housenumber), ...]
     with open(slim_path, encoding="utf-8") as f:
         for line in f:
             feat = json.loads(line)
             lon, lat = feat["geometry"]["coordinates"]
-            tx, ty, ox, oy = pixel_in_tile(lon, lat, zoom)
-            tiles[(tx, ty)].append(
-                (ox, oy, feat["properties"].get("housenumber", ""))
-            )
+            housenumber = feat["properties"].get("housenumber", "")
+            gx, gy = lonlat_to_pixel(lon, lat, zoom)
+            _bucket_point(tiles, gx, gy, housenumber, font, label)
 
-    label = zoom in config.RASTER_LABEL_ZOOMS
     out_dir = os.path.join(config.RASTER_TILE_DIR, str(zoom))
     print(f"Raster z{zoom}: rendering {len(tiles):,} tiles (labels={label}) ...")
 
@@ -58,6 +59,29 @@ def _render_zoom(slim_path, zoom, font):
     return len(tiles)
 
 
+def _bucket_point(tiles, gx, gy, housenumber, font, label):
+    """Add a point to every tile its dot + label footprint overlaps.
+
+    A point near a tile edge is added to the neighbouring tile too, with an
+    out-of-range offset, so labels and dots straddling a seam render whole in
+    both tiles instead of being clipped at the boundary.
+    """
+    half_h = max(DOT_RADIUS, FONT_SIZE / 2) + STROKE_WIDTH
+    left = gx - DOT_RADIUS - STROKE_WIDTH
+    right = gx + DOT_RADIUS + STROKE_WIDTH
+    if label and housenumber:
+        right = (gx + DOT_RADIUS + LABEL_GAP
+                 + font.getlength(housenumber) + STROKE_WIDTH)
+
+    tx0, tx1 = int(left // TILE_SIZE), int(right // TILE_SIZE)
+    ty0, ty1 = int((gy - half_h) // TILE_SIZE), int((gy + half_h) // TILE_SIZE)
+    for tx in range(tx0, tx1 + 1):
+        for ty in range(ty0, ty1 + 1):
+            tiles[(tx, ty)].append(
+                (gx - tx * TILE_SIZE, gy - ty * TILE_SIZE, housenumber)
+            )
+
+
 def _render_tile(points, font, label):
     img = Image.new("RGBA", (TILE_SIZE, TILE_SIZE), (0, 0, 0, 0))
     draw = ImageDraw.Draw(img)
@@ -69,15 +93,14 @@ def _render_tile(points, font, label):
     if label:
         for ox, oy, housenumber in points:
             if housenumber:
-                _draw_label(draw, ox + DOT_RADIUS + 1, oy, housenumber, font)
+                _draw_label(draw, ox + DOT_RADIUS + LABEL_GAP, oy, housenumber,
+                            font)
     return img
 
 
 def _draw_label(draw, x, y, text, font):
-    """Draw text with a 1-px white halo, vertically centered on y."""
-    y -= FONT_SIZE // 2
-    for dx in (-1, 0, 1):
-        for dy in (-1, 0, 1):
-            if dx or dy:
-                draw.text((x + dx, y + dy), text, font=font, fill=HALO_COLOR)
-    draw.text((x, y), text, font=font, fill=LABEL_COLOR)
+    """Draw text vertically centred on y, with a clean white halo."""
+    draw.text(
+        (x, y), text, font=font, fill=LABEL_COLOR,
+        stroke_width=STROKE_WIDTH, stroke_fill=HALO_COLOR, anchor="lm",
+    )

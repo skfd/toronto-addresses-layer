@@ -63,7 +63,7 @@
 <h2>Add to iD</h2>
 <h3>Vector layer (interactive)</h3>
 <ol>
-  <li>Open the iD editor and press <kbd>F</kbd> for the <em>Map Data</em> panel.</li>
+  <li>Open the iD editor and press <kbd>U</kbd> for the <em>Map Data</em> panel.</li>
   <li>Under <em>Custom Map Data</em>, open the settings and paste this URL:</li>
 </ol>
 <pre class="url">{{VECTOR_URL}}</pre>
@@ -83,6 +83,13 @@
   <li>Paste this URL template:</li>
 </ol>
 <pre class="url">{{RASTER_URL}}</pre>
+
+<div class="note">
+  <strong>Tip:</strong> enable <em>both</em> layers at once. iD renders the
+  vector layer as small pink dots with house-number labels (and click-to-inspect
+  for the full address tags); the raster background makes the numbers readable
+  at a glance. Together you get the best of both.
+</div>
 
 <h2>Add to JOSM</h2>
 <h3>Raster layer (recommended for JOSM)</h3>
@@ -130,7 +137,9 @@
   &nbsp;&middot;&nbsp;
   <a href="https://skfd.github.io/toronto-addresses-import/">Toronto address change tracker</a>
   <br>
-  Future work: submission to the OSM Editor Layer Index for one-click access.
+  Future work: submission to the OSM Editor Layer Index for one-click access,
+  and to <a href="https://github.com/facebook/Rapid">Rapid</a> as a custom
+  dataset for richer in-editor styling and click-to-add workflows.
 </footer>
 
 </main>

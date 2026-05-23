@@ -44,6 +44,11 @@ def slim(src_path):
                 text = str(val).strip()
                 if text and text != "None":
                     props_out[out_key] = text
+            # iD's Custom Map Data draws labels from a feature's `name`
+            # property -- mirror the housenumber there so dots get a visible
+            # number in the editor, matching the raster layer.
+            if "housenumber" in props_out:
+                props_out["name"] = props_out["housenumber"]
             out.write(json.dumps({
                 "type": "Feature",
                 "geometry": {"type": "Point", "coordinates": list(point)},

@@ -47,9 +47,9 @@ VECTOR_MINZOOM = 12
 VECTOR_MAXZOOM = 19
 VECTOR_LAYER_NAME = "addresses"
 
-# Raster tiles. Editors overzoom z18 -> z19.
-RASTER_ZOOMS = [16, 17, 18]
-RASTER_LABEL_ZOOMS = {17, 18}
+# Raster tiles. Editors overzoom z19 -> z20+.
+RASTER_ZOOMS = [16, 17, 18, 19]
+RASTER_LABEL_ZOOMS = {17, 18, 19}
 
 # Slim GeoJSON property map: source property key -> short output key.
 MVT_PROPERTIES = {

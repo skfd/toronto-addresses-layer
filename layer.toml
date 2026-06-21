@@ -1,0 +1,39 @@
+# Toronto address layer config. The data-source block (everything above
+# [layer]) mirrors ontario-address-changes/datasets/toronto.toml. The engine
+# that consumes this lives in ../address-layerist.
+
+slug = "toronto"
+provider = "City of Toronto"
+# Live snapshot, already published in WGS84 (the registry's source_crs/EPSG:2952
+# applies only to the change-tracker's projected baseline, not this endpoint).
+data_url = "https://ckan0.cf.opendata.inter.prod-toronto.ca/dataset/abedd8bc-e3dd-4d45-8e69-79165a76e4fa/resource/b1c2ab72-dfe7-4b29-8550-6d1cfaa61733/download/address-points-4326.geojson"
+access = "static"            # arcgis | static
+format = "geojson"           # geojson | shapefile (static only)
+license_name = "Open Government Licence - Toronto"
+
+[fields]                     # canonical -> source property
+number = "ADDRESS_NUMBER"
+street = "LINEAR_NAME_FULL"
+full   = "ADDRESS_FULL"
+# Toronto address points carry no unit field.
+
+[layer]
+title        = "Toronto Address Points"
+github_repo  = "skfd/toronto-addresses-layer"
+pages_url    = "https://skfd.github.io/toronto-addresses-layer"
+dataset_page = "https://open.toronto.ca/dataset/address-points-municipal-toronto-one-address-repository/"
+license_url  = "https://open.toronto.ca/open-data-licence/"
+attribution  = "(c) City of Toronto, Open Government Licence - Toronto"
+changes_url  = "https://skfd.github.io/toronto-addresses-import/"
+# GoatCounter analytics, injected before </head> (carried over from the
+# pre-engine landing page; needs engine >= v0.1.3).
+head_extra   = '<script data-goatcounter="https://toronto-addresses-layer.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
+# Floor for the slim feature count (~525k addresses); aborts on a short pull.
+expected_min = 400000
+# Surface Toronto's two extra source props as tile tags (matches the
+# pre-engine build, which mapped LO_NUM_SUF -> suffix and ADDRESS_CLASS -> class).
+mvt_extra = { LO_NUM_SUF = "suffix", ADDRESS_CLASS = "class" }
+
+# Defaults match the pre-engine build, so no zoom overrides are needed:
+#   vector_minzoom = 12, vector_maxzoom = 19
+#   raster_zooms = [16, 17, 18, 19], raster_label_zooms = [17, 18, 19]

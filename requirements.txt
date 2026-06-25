@@ -1,6 +1,6 @@
 # The build pipeline is the address-layerist engine, installed from GitHub and
 # pinned to a release tag for reproducible builds:
-address-layerist @ git+https://github.com/skfd/address-layerist.git@v0.1.3
+address-layerist @ git+https://github.com/skfd/address-layerist.git@v0.2.0
 # For local engine development, install editable against a sibling checkout
 # instead:
 #   -e ../address-layerist

@@ -12,7 +12,8 @@ Common commands (run from this repo root):
 
 ```
 pip install -r requirements.txt   # installs the engine, pinned to a release tag
-python run.py build      # fetch + slim + vector + raster + site
+addressvault pull toronto         # acquire data (engine does not fetch)
+python run.py build      # slim + vector + raster + site
 python run.py update     # build + publish
 ```
 

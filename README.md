@@ -28,13 +28,13 @@ The vector-tile step needs WSL2 + tippecanoe once -- see
 ## Usage
 
 ```
-python run.py fetch      # download the latest address GeoJSON (smart-cached)
-python run.py slim       # stream it into a slim GeoJSONL + meta
+addressvault pull toronto    # acquire data into the vault (separate tool)
+python run.py slim       # slim the latest toronto dump into a GeoJSONL + meta
 python run.py vector     # vector (MVT) tiles via WSL tippecanoe
 python run.py raster     # labelled raster (PNG) tiles
 python run.py site       # render the landing page
 
-python run.py build      # all of the above
+python run.py build      # slim + vector + raster + site
 python run.py update     # build + publish (the daily entry point)
 ```
 

@@ -1,4 +1,4 @@
-$taskName   = "TorontoAddressLayer"
+$taskName   = "kk-TorontoAddressLayer"
 $projectDir = $PSScriptRoot
 $logFile    = "$projectDir\logs\scheduler.log"
 
@@ -8,10 +8,12 @@ if (-not (Test-Path "$projectDir\logs")) {
 
 $action = New-ScheduledTaskAction `
     -Execute "cmd.exe" `
-    -Argument "/c cd /d `"$projectDir`" && python run.py update >> `"$logFile`" 2>&1"
+    -Argument "/c cd /d `"$projectDir`" && (python -m addressvault.cli pull toronto --wait && python run.py update) >> `"$logFile`" 2>&1"
 
-# Runs ~2 hours after the sibling toronto-addresses-import task (noon),
-# so fresh city data is available before tiles are built.
+# The address-layerist engine never downloads; it reads the newest toronto-*.geojson
+# from the vault. So pull first (--wait coalesces onto any in-flight pull), then
+# build. 14:00 keeps it after the noon data refresh, so it usually reuses that day's
+# snapshot rather than pulling the ~590 MB file cold.
 $trigger  = New-ScheduledTaskTrigger -Daily -At "14:00"
 $settings = New-ScheduledTaskSettingsSet -ExecutionTimeLimit (New-TimeSpan -Hours 2) -StartWhenAvailable
 

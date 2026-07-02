@@ -28,7 +28,7 @@ The vector-tile step needs WSL2 + tippecanoe once -- see
 ## Usage
 
 ```
-addressvault pull toronto    # acquire data into the vault (separate tool)
+addressvault pull toronto --wait   # acquire data into the vault (separate tool; --wait coalesces)
 python run.py slim       # slim the latest toronto dump into a GeoJSONL + meta
 python run.py vector     # vector (MVT) tiles via WSL tippecanoe
 python run.py raster     # labelled raster (PNG) tiles

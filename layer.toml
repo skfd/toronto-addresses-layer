@@ -34,6 +34,12 @@ expected_min = 400000
 # pre-engine build, which mapped LO_NUM_SUF -> suffix and ADDRESS_CLASS -> class).
 mvt_extra = { LO_NUM_SUF = "suffix", ADDRESS_CLASS = "class" }
 
+# Finish the labels past z19. z19 leaves 251 addresses unlabelled (doors a
+# metre or two apart); z20 labels 247 of them and ships as 180 tiles / 1.25 MB,
+# because a completion zoom renders only the ground holding its stragglers.
+# Capped at 20: the last 4 are two stacked pairs, and 21 was not measured.
+raster_complete_to = 20
+
 # Defaults match the pre-engine build, so no zoom overrides are needed:
 #   vector_minzoom = 12, vector_maxzoom = 19
 #   raster_zooms = [16, 17, 18, 19], raster_label_zooms = [17, 18, 19]

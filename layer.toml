@@ -27,7 +27,7 @@ attribution  = "(c) City of Toronto, Open Government Licence - Toronto"
 changes_url  = "https://skfd.github.io/toronto-addresses-import/"
 # GoatCounter analytics, injected before </head> (carried over from the
 # pre-engine landing page; needs engine >= v0.1.3).
-head_extra   = '<script data-goatcounter="https://toronto-addresses-layer.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
+head_extra   = '<script data-goatcounter="https://osm-toronto.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'
 # Floor for the slim feature count (~525k addresses); aborts on a short pull.
 expected_min = 400000
 # Surface Toronto's two extra source props as tile tags (matches the

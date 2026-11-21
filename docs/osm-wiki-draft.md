@@ -30,8 +30,8 @@ Two community tools turn this dataset into map-editor reference overlays and a c
 
 Pre-rendered map tiles of every municipal address point, refreshed daily, for use as a reference overlay while mapping in iD and JOSM.
 
-* Landing page (with copy-paste instructions): https://skfd.github.io/toronto-addresses-layer/
-* Source code: https://github.com/skfd/toronto-addresses-layer
+* Landing page (with copy-paste instructions): https://toronto-maps.github.io/toronto-addresses-layer/
+* Source code: https://github.com/toronto-maps/toronto-addresses-layer
 
 Two layers are produced:
 
@@ -44,19 +44,19 @@ Two layers are produced:
 |}
 
 '''Add to iD''' — Map Data panel (<kbd>U</kbd>) → Custom Map Data, paste:
- https://skfd.github.io/toronto-addresses-layer/tiles/vector/{z}/{x}/{y}.pbf
+ https://toronto-maps.github.io/toronto-addresses-layer/tiles/vector/{z}/{x}/{y}.pbf
 or the raster background:
- https://skfd.github.io/toronto-addresses-layer/tiles/raster/{z}/{x}/{y}.png
+ https://toronto-maps.github.io/toronto-addresses-layer/tiles/raster/{z}/{x}/{y}.png
 
 '''Add to JOSM''' — Preferences → Imagery → +TMS, paste (note JOSM uses <code>{zoom}</code>, not <code>{z}</code>):
- tms[16,18]:https://skfd.github.io/toronto-addresses-layer/tiles/raster/{zoom}/{x}/{y}.png
+ tms[16,18]:https://toronto-maps.github.io/toronto-addresses-layer/tiles/raster/{zoom}/{x}/{y}.png
 
 === Toronto address change tracker ===
 
 A sibling project that tracks how the City's address dataset changes over time, to help find new, moved, or removed addresses that may need attention in OSM.
 
-* Site: https://skfd.github.io/toronto-addresses-import/
-* Source code: https://github.com/skfd/toronto-addresses-import
+* Site: https://toronto-maps.github.io/toronto-addresses-import/
+* Source code: https://github.com/toronto-maps/toronto-addresses-import
 
 === See also ===
 
@@ -68,7 +68,7 @@ A submission to the [https://github.com/osmlab/editor-layer-index Editor Layer I
 ## Draft 2 — row for WikiProject Canada/Open data
 
 ```wikitext
-* '''Toronto Address Points''' — 525,000+ municipal address points, [https://open.toronto.ca/open-data-licence/ OGL – Toronto]. Available as daily-refreshed iD/JOSM reference tile layers (vector + raster) at https://skfd.github.io/toronto-addresses-layer/ and as a change tracker at https://skfd.github.io/toronto-addresses-import/ . Reference only, not a bulk import.
+* '''Toronto Address Points''' — 525,000+ municipal address points, [https://open.toronto.ca/open-data-licence/ OGL – Toronto]. Available as daily-refreshed iD/JOSM reference tile layers (vector + raster) at https://toronto-maps.github.io/toronto-addresses-layer/ and as a change tracker at https://toronto-maps.github.io/toronto-addresses-import/ . Reference only, not a bulk import.
 ```
 
 ---

@@ -19,12 +19,12 @@ full   = "ADDRESS_FULL"
 
 [layer]
 title        = "Toronto Address Points"
-github_repo  = "skfd/toronto-addresses-layer"
-pages_url    = "https://skfd.github.io/toronto-addresses-layer"
+github_repo  = "toronto-maps/toronto-addresses-layer"
+pages_url    = "https://toronto-maps.github.io/toronto-addresses-layer"
 dataset_page = "https://open.toronto.ca/dataset/address-points-municipal-toronto-one-address-repository/"
 license_url  = "https://open.toronto.ca/open-data-licence/"
 attribution  = "(c) City of Toronto, Open Government Licence - Toronto"
-changes_url  = "https://skfd.github.io/toronto-addresses-import/"
+changes_url  = "https://toronto-maps.github.io/toronto-addresses-import/"
 # GoatCounter analytics, injected before </head> (carried over from the
 # pre-engine landing page; needs engine >= v0.1.3).
 head_extra   = '<script data-goatcounter="https://osm-toronto.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>'

@@ -5,7 +5,7 @@ dataset (~525,000 addresses) into map-tile layers (interactive vector + labelled
 raster) that OpenStreetMap mappers can add to the **iD** and **JOSM** editors as
 a reference overlay.
 
-**Live layer and how to add it: https://skfd.github.io/toronto-addresses-layer/**
+**Live layer and how to add it: https://toronto-maps.github.io/toronto-addresses-layer/**
 
 ![The vector layer in iD, with a clicked point's address tags in the inspector](assets/iD.png)
 
@@ -51,7 +51,7 @@ Run as Administrator:
 ```
 
 The task runs `python run.py update`. It is set for 14:00 -- about two hours
-after the sibling [toronto-addresses-import](https://github.com/skfd/toronto-addresses-import)
+after the sibling [toronto-addresses-import](https://github.com/toronto-maps/toronto-addresses-import)
 task -- so fresh city data is available before tiles are built.
 
 ## Licence / attribution
